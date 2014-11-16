@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+<h:form>
+<p><h:commandButton action="#{readerMB.createReader()}" value="Create reader" /><h:commandButton action="#{bookMB.createBook()}" value="Create book" /> </p>
+</h:form>
+<h2>Readers</h2>
+<h:dataTable value="#{readerMB.allReaders}" var="p">
+	<h:column><h:outputText value="#{p.id}" /> </h:column>
+	<h:column><h:outputText value="#{p.name}" /> </h:column>
+	<h:column>
+	<h:form>
+	<h:commandButton action="#{readerMB.editReader(p)}" value="Edit" />
+	<h:commandButton action="#{readerMB.deleteReader(p)}" value="Smazat" />
+	</h:form>
+	 </h:column>
+</h:dataTable>
+<h2>Books</h2>
+<h:dataTable value="#{bookMB.allBooks}" var="t">
+	<h:column><h:outputText value="#{t.id}" /> </h:column>
+	<h:column><h:outputText value="#{t.name}" /> </h:column>
+	<h:column> </h:column>
+	<h:column>
+	<h:form>
+	<h:commandButton action="#{bookMB.editBook(t)}" value="Edit" />
+	<h:commandButton action="#{bookMB.deleteBook(t)}" value="Smazat" />
+	</h:form>
+	 </h:column>
+</h:dataTable>
+
+<h:form>
+<h:selectOneMenu value="#{bookMB.editedBook}">
+	<f:selectItem value="#{null}" itemLabel="NIKDO"/>
+	<f:selectItems value="#{bookMB.allBooks}" var="u" itemLabel="#{u.name} (#{u.author})" itemValue="#{u}"></f:selectItems>
+</h:selectOneMenu>
+<h:commandButton value="Edit" action="#{bookMB.editBook()}" />
+</h:form>
+</body> 
+</html>
